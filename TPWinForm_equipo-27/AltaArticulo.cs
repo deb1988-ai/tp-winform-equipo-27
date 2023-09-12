@@ -44,11 +44,11 @@ namespace TPWinForm_equipo_27
             try
             {
                 cboCategoria.DataSource = articuloNegocio.listar();
-                cboCategoria.ValueMember = "";
-                cboCategoria.DisplayMember = "";
+                cboCategoria.ValueMember = "Id";
+                cboCategoria.DisplayMember = "Descripcion";
                 cboMarca.DataSource = articuloNegocio.listar();
-                cboMarca.ValueMember = "";
-                cboMarca.DisplayMember = "";
+                cboMarca.ValueMember = "Id";
+                cboMarca.DisplayMember = "Descripcion";
             }
             catch (Exception ex)
             {
