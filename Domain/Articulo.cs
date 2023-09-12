@@ -8,13 +8,6 @@ namespace dominio
 {
     public class Articulo
     {
-        /*Código de artículo.
-Nombre.
-Descripción.
-Marca (seleccionable de una lista desplegable).
-Categoría (seleccionable de una lista desplegable.
-Imagen.
-Precio.*/
         public string codigo { get; set; }
 
         public string nombre { get; set; }

@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dominio;
+using negocio;
 
 namespace TPWinForm_equipo_27
 {
     public partial class AltaArticulo : Form
     {
+
         public AltaArticulo()
         {
             InitializeComponent();
@@ -31,6 +34,24 @@ namespace TPWinForm_equipo_27
             catch (Exception ex)
             {
 
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AltaArticulo_Load(object sender, EventArgs e)
+        {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            try
+            {
+                cboCategoria.DataSource = articuloNegocio.listar();
+                cboCategoria.ValueMember = "";
+                cboCategoria.DisplayMember = "";
+                cboMarca.DataSource = articuloNegocio.listar();
+                cboMarca.ValueMember = "";
+                cboMarca.DisplayMember = "";
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.ToString());
             }
         }
