@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnAltaArticulo = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnAltaArticulo
+            // 
+            this.btnAltaArticulo.Location = new System.Drawing.Point(644, 46);
+            this.btnAltaArticulo.Name = "btnAltaArticulo";
+            this.btnAltaArticulo.Size = new System.Drawing.Size(113, 37);
+            this.btnAltaArticulo.TabIndex = 0;
+            this.btnAltaArticulo.Text = "Agregar artículo";
+            this.btnAltaArticulo.UseVisualStyleBackColor = true;
+            this.btnAltaArticulo.Click += new System.EventHandler(this.btnAltaArticulo_Click);
             // 
             // TPWinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAltaArticulo);
             this.Name = "TPWinForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TPWinForm";
@@ -43,6 +55,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnAltaArticulo;
     }
 }
 

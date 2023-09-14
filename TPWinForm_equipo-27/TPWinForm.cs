@@ -16,5 +16,12 @@ namespace TPWinForm_equipo_27
         {
             InitializeComponent();
         }
+
+        private void btnAltaArticulo_Click(object sender, EventArgs e)
+        {
+            AltaArticulo alta = new AltaArticulo();
+            alta.ShowDialog();
+           
+        }
     }
 }

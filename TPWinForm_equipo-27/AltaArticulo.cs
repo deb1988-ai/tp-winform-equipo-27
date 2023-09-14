@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Domain;
 using dominio;
 using negocio;
 
@@ -39,6 +40,17 @@ namespace TPWinForm_equipo_27
             articulo.UrlImagen = txtUrlImagen.Text;
             articulo.marca = (Marcas)cboMarca.SelectedItem;
             articulo.categoria = (Categorias)cboCategoria.SelectedItem;
+            if (articulo.codigo != null)
+                {
+                    articuloNegocio.modificar(articulo);
+                    MessageBox.Show("Modificado exitosamente");
+                }
+                else
+                {
+                    articuloNegocio.agregar(articulo);
+                    MessageBox.Show("Agregado exitosamente");
+                }
+                Close();
 
             }
             catch (Exception ex)
@@ -58,6 +70,18 @@ namespace TPWinForm_equipo_27
                 cboMarca.DataSource = articuloNegocio.listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.codigo;
+                    txtNombre.Text = articulo.nombre;
+                    txtDescripcion.Text = articulo.descripcion;
+                    txtUrlImagen.Text = articulo.UrlImagen;
+                    cargarImagen(articulo.UrlImagen);
+                    cboMarca.SelectedValue = articulo.marca;
+                    cboCategoria.SelectedValue = articulo.categoria.Id;
+                }
+
+
             }
             catch (Exception ex)
             {

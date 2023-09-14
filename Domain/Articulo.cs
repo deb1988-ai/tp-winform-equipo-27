@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,16 @@ namespace dominio
 {
     public class Articulo
     {
+        public int Id { get; set; }
         public string codigo { get; set; }
 
         public string nombre { get; set; }
 
         public string descripcion { get; set;}
 
-        public string marca { get; set; }
+        public Marcas marca { get; set; }
 
-        public string categoria { get; set; }
-
-        public string imagen { get; set; }
+        public Categorias categoria { get; set; }
 
         public float precio { get; set;}
 
