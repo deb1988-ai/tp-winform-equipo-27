@@ -14,7 +14,7 @@ namespace TPWinForm_equipo_27
 {
     public partial class AltaArticulo : Form
     {
-
+        private Articulo articulo = null;
         public AltaArticulo()
         {
             InitializeComponent();
@@ -27,13 +27,22 @@ namespace TPWinForm_equipo_27
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
             try
             {
+            if(articulo == null)
+                    articulo = new Articulo();
+            articulo.codigo = txtCodigo.Text;
+            articulo.nombre = txtNombre.Text;
+            articulo.descripcion = txtDescripcion.Text;
+            articulo.UrlImagen = txtUrlImagen.Text;
+            articulo.marca = (Marcas)cboMarca.SelectedItem;
+            articulo.categoria = (Categorias)cboCategoria.SelectedItem;
 
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -55,5 +64,23 @@ namespace TPWinForm_equipo_27
                 MessageBox.Show(ex.ToString());
             }
         }
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtUrlImagen.Text);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxArticulo.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+                pbxArticulo.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
+            }
+        }
+
+
     }
 }

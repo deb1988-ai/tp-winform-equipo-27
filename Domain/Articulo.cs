@@ -22,6 +22,8 @@ namespace dominio
 
         public float precio { get; set;}
 
+        public string UrlImagen { get; set; }
+
         public override string ToString()
         {
             return nombre;
