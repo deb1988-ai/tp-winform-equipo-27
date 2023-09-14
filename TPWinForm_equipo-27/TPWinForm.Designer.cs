@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.btnAltaArticulo = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.dgvArticulos = new System.Windows.Forms.DataGridView();
+            this.pbxArticulo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAltaArticulo
@@ -41,15 +47,57 @@
             this.btnAltaArticulo.UseVisualStyleBackColor = true;
             this.btnAltaArticulo.Click += new System.EventHandler(this.btnAltaArticulo_Click);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(644, 175);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(113, 37);
+            this.btnEliminar.TabIndex = 1;
+            this.btnEliminar.Text = "Eliminar Artículo";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(644, 112);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(113, 37);
+            this.btnModificar.TabIndex = 2;
+            this.btnModificar.Text = "Modificar artículo";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // dgvArticulos
+            // 
+            this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvArticulos.Location = new System.Drawing.Point(34, 46);
+            this.dgvArticulos.Name = "dgvArticulos";
+            this.dgvArticulos.Size = new System.Drawing.Size(573, 295);
+            this.dgvArticulos.TabIndex = 3;
+            // 
+            // pbxArticulo
+            // 
+            this.pbxArticulo.Location = new System.Drawing.Point(644, 236);
+            this.pbxArticulo.Name = "pbxArticulo";
+            this.pbxArticulo.Size = new System.Drawing.Size(100, 50);
+            this.pbxArticulo.TabIndex = 4;
+            this.pbxArticulo.TabStop = false;
+            // 
             // TPWinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pbxArticulo);
+            this.Controls.Add(this.dgvArticulos);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAltaArticulo);
             this.Name = "TPWinForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TPWinForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -57,6 +105,10 @@
         #endregion
 
         private System.Windows.Forms.Button btnAltaArticulo;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DataGridView dgvArticulos;
+        private System.Windows.Forms.PictureBox pbxArticulo;
     }
 }
 

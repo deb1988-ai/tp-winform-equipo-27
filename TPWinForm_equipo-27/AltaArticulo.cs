@@ -61,13 +61,16 @@ namespace TPWinForm_equipo_27
 
         private void AltaArticulo_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+
+           
             try
             {
-                cboCategoria.DataSource = articuloNegocio.listar();
+                cboCategoria.DataSource = categoriaNegocio.listar();
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
-                cboMarca.DataSource = articuloNegocio.listar();
+                cboMarca.DataSource = marcaNegocio.listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
                 if (articulo != null)
