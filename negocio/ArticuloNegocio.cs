@@ -17,13 +17,20 @@ namespace negocio
 
 			try
 			{
-                datos.setearConsulta("Select Codigo, Nombre From ARTICULOS");
+                datos.setearConsulta("Select Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, Precio From ARTICULOS A,MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
                     aux.codigo = (string)datos.Lector["Codigo"];
                     aux.nombre = (string)datos.Lector["Nombre"];
+                    aux.descripcion = (string)datos.Lector["Descripcion"];
+                    aux.precio = (decimal)datos.Lector["Precio"];
+
+                    aux.marca = new Marcas();
+                    aux.marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.categoria = new Categorias();
+                    aux.categoria.Descripcion = (string)datos.Lector["Categoria"];
 
                     lista.Add(aux);
                 }

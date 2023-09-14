@@ -74,6 +74,7 @@ namespace TPWinForm_equipo_27
                 listaArticulos = negocio.listar();
                 dgvArticulos.DataSource = listaArticulos;
                 cargarImagen(listaArticulos[0].UrlImagen);
+                dgvArticulos.Columns["Id"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -93,5 +94,9 @@ namespace TPWinForm_equipo_27
             }
         }
 
+        private void TPWinForm_Load(object sender, EventArgs e)
+        {
+            cargar();
+        }
     }
 }

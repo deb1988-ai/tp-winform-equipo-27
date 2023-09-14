@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Domain;
 using dominio;
 using negocio;
 
@@ -33,14 +32,14 @@ namespace TPWinForm_equipo_27
             try
             {
             if(articulo == null)
-                    articulo = new Articulo();
-            articulo.codigo = txtCodigo.Text;
-            articulo.nombre = txtNombre.Text;
-            articulo.descripcion = txtDescripcion.Text;
-            articulo.UrlImagen = txtUrlImagen.Text;
-            articulo.marca = (Marcas)cboMarca.SelectedItem;
-            articulo.categoria = (Categorias)cboCategoria.SelectedItem;
-            if (articulo.codigo != null)
+                articulo = new Articulo();
+                articulo.codigo = txtCodigo.Text;
+                articulo.nombre = txtNombre.Text;
+                articulo.descripcion = txtDescripcion.Text;
+                articulo.UrlImagen = txtUrlImagen.Text;
+                articulo.marca = (Marcas)cboMarca.SelectedItem;
+                articulo.categoria = (Categorias)cboCategoria.SelectedItem;
+                if (articulo.codigo != null)
                 {
                     articuloNegocio.modificar(articulo);
                     MessageBox.Show("Modificado exitosamente");

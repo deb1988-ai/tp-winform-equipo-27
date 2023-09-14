@@ -1,5 +1,4 @@
-﻿using Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +19,7 @@ namespace dominio
 
         public Categorias categoria { get; set; }
 
-        public float precio { get; set;}
+        public decimal precio { get; set;}
 
         public string UrlImagen { get; set; }
 
