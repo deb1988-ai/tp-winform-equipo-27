@@ -19,11 +19,11 @@ namespace negocio
 			{
                 datos.setearConsulta("Select Codigo, Nombre From ARTICULOS");
                 datos.ejecutarLectura();
-                while (datos.SqlDataReader.Read())
+                while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.codigo = (string)datos.SqlDataReader["Codigo"];
-                    aux.nombre = (string)datos.SqlDataReader["Nombre"];
+                    aux.codigo = (string)datos.Lector["Codigo"];
+                    aux.nombre = (string)datos.Lector["Nombre"];
 
                     lista.Add(aux);
                 }

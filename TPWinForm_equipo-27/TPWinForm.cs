@@ -25,17 +25,24 @@ namespace TPWinForm_equipo_27
         {
             AltaArticulo alta = new AltaArticulo();
             alta.ShowDialog();
-           
+            cargar();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Articulo seleccionado;
-            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            if(dgvArticulos.CurrentCell is null)
+            {
+                MessageBox.Show("Debe Seleccionar un Artículo");
+            }
+            else
+            {
+                seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
-            AltaArticulo modificar = new AltaArticulo();
-            modificar.ShowDialog();
-
+                AltaArticulo modificar = new AltaArticulo();
+                modificar.ShowDialog();
+                cargar();
+            } 
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

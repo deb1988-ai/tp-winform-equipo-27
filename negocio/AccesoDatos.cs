@@ -12,9 +12,11 @@ namespace negocio
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
-        public SqlDataReader Lector;
 
-        public SqlDataReader SqlDataReader { get { return lector; } }
+        public SqlDataReader Lector
+        {
+            get { return lector; }
+        }
 
         public AccesoDatos()
         {
@@ -42,13 +44,6 @@ namespace negocio
                 throw ex;
             }
         }
-    
-        public void cerrarConexion()
-        {
-            if (lector != null)
-                lector.Close();
-            conexion.Close();
-        }
 
         public void ejecutarAccion()
         {
@@ -69,6 +64,11 @@ namespace negocio
             comando.Parameters.AddWithValue(nombre, valor);
         }
 
-
+        public void cerrarConexion()
+        {
+            if (lector != null)
+                lector.Close();
+            conexion.Close();
+        }
     }
 }
