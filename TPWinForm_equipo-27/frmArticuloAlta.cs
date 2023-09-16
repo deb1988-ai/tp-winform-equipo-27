@@ -20,6 +20,13 @@ namespace TPWinForm_equipo_27
             InitializeComponent();
         }
 
+        public frmArticuloAlta(Articulo art)
+        {
+            InitializeComponent();
+            this.articulo = art;
+            this.Text = "Modificar Articulo";
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
@@ -31,12 +38,13 @@ namespace TPWinForm_equipo_27
 
             try
             {
-            if(articulo == null)
-                articulo = new Articulo();
+                if(articulo == null)
+                    articulo = new Articulo();
+
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-          //      articulo.ListaImagenes = txtUrlImagen.Text;
+            //     articulo.ListaImagenes = txtUrlImagen.Text;
                 articulo.Marca = (Marcas)cboMarca.SelectedItem;
                 articulo.Categoria = (Categorias)cboCategoria.SelectedItem;
                 if (articulo.Codigo != null)
@@ -69,20 +77,21 @@ namespace TPWinForm_equipo_27
                 cboCategoria.DataSource = categoriaNegocio.listar();
                 cboCategoria.ValueMember = "Id";
                 cboCategoria.DisplayMember = "Descripcion";
+
                 cboMarca.DataSource = marcaNegocio.listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
+
                 if (articulo != null)
                 {
                     txtCodigo.Text = articulo.Codigo;
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
-          //          txtUrlImagen.Text = articulo.ListaImagenes;
-           //         cargarImagen(articulo.ListaImagenes);
-                    cboMarca.SelectedValue = articulo.Marca;
+                    txtUrlImagen.Text = articulo.ListaImagenes[0].ImagenUrl;
+                    cargarImagen(articulo.ListaImagenes[0].ImagenUrl);
+                    cboMarca.SelectedValue = articulo.Marca.Id;
                     cboCategoria.SelectedValue = articulo.Categoria.Id;
                 }
-
 
             }
             catch (Exception ex)

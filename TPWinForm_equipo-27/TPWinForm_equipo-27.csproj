@@ -71,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
@@ -97,6 +98,18 @@
       <Project>{8642b27d-ad5a-4092-9b0f-5c0e251088b1}</Project>
       <Name>negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-solid2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen-to-square-solid2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen-to-square-solid3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-solid3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

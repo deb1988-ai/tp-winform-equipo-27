@@ -40,7 +40,7 @@ namespace TPWinForm_equipo_27
             {
                 seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
-                frmArticuloAlta modificar = new frmArticuloAlta();
+                frmArticuloAlta modificar = new frmArticuloAlta(seleccionado);
                 modificar.ShowDialog();
                 cargarArticulos();
             } 
