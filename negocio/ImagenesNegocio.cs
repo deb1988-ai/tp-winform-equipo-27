@@ -40,6 +40,20 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void eliminar(string url)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("delete from imagenes where ImagenUrl= @url");
+                datos.setearParametro("@url", url);
+                datos.ejecutarAccion();
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

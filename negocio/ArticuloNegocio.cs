@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using dominio;
 
@@ -54,15 +55,41 @@ namespace negocio
             }
         }
 
-        public void agregar(Articulo nuevo)
+        public void agregar(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.Codigo + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', @idMarca, @idCategoria)");
-                datos.setearConsulta("Insert into Imagenes (IdArticulo,UrlImagen)values(" + nuevo.Id + ", @idMarca, @ImagenUrl)");
+                datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" +
+                    "@codigo, @nombre, @descripcion, @idMarca, @idCategoria,@precio)");
+                datos.setearParametro("@codigo", articulo.Codigo);
+                datos.setearParametro("@nombre", articulo.Nombre);
+                datos.setearParametro("@descripcion", articulo.Descripcion);
+                datos.setearParametro("@idMarca", articulo.Marca.Id);
+                datos.setearParametro("@idCategoria", articulo.Categoria.Id);
+                datos.setearParametro("@precio", articulo.Precio);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                datos.setearConsulta("select top 1 Id from articulos order by id desc");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    articulo.Id = (int)datos.Lector["Id"];
+                }
+                datos.cerrarConexion();
+
+                foreach (var imagen in articulo.ListaImagenes)
+                {
+                    datos.setearConsulta("insert into imagenes (idArticulo, ImagenUrl) values (@id,@url)");
+                    datos.setearParametro("@id", articulo.Id);
+                    datos.setearParametro("@url", imagen.ImagenUrl);
+
+                    datos.ejecutarAccion();
+                    datos.cerrarConexion();
+                }
             }
             catch (Exception ex)
             {
@@ -79,15 +106,40 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, IdMarca = @IdMarca, IdCategoria = @IdCategoria Where Codigo = @Codigo");
-                datos.setearParametro("@numero", articulo.Codigo);
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo," +
+                    " Nombre = @nombre," +
+                    " Descripcion = @descripcion," +
+                    " IdMarca = @IdMarca," +
+                    " IdCategoria = @idCategoria" +
+                    " Precio = @precio" +
+                    " Where Id = @id");
+
+                datos.setearParametro("@codigo", articulo.Codigo);
                 datos.setearParametro("@nombre", articulo.Nombre);
-                datos.setearParametro("@desc", articulo.Descripcion);
-                datos.setearParametro("@img", articulo.ListaImagenes);
-                datos.setearParametro("@idTipo", articulo.Marca.Id);
-                datos.setearParametro("@idDebilidad", articulo.Categoria.Id);
+                datos.setearParametro("@descripcion", articulo.Descripcion);
+                datos.setearParametro("@idMarca", articulo.Marca.Id);
+                datos.setearParametro("@idCategoria", articulo.Categoria.Id);
+                datos.setearParametro("@precio", articulo.Precio);
+                datos.setearParametro("@id", articulo.Id);
 
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                datos.setearConsulta("delete from imagenes where idArticulo = @id");
+
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                foreach (var imagen in articulo.ListaImagenes)
+                {
+                    datos.setearConsulta("insert into imagenes (idArticulo, ImagenUrl) values (" +
+                        "@id, '" +
+                        imagen.ImagenUrl+ "')");
+
+                    datos.ejecutarAccion();
+                    datos.cerrarConexion();
+                }
+
             }
             catch (Exception ex)
             {
@@ -99,14 +151,18 @@ namespace negocio
             }
         }
 
-        public void eliminar(string codigo)
+        public void eliminar(int id)
         {
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.setearConsulta("delete from ARTICULOS where codigo= @Codigo");
-                datos.setearParametro("@codigo", codigo);
+                datos.setearConsulta("delete from ARTICULOS where id= @id");
+                datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+                datos.setearConsulta("delete from IMAGENES where idArticulo = @id");
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
 
             }
             catch (Exception ex)

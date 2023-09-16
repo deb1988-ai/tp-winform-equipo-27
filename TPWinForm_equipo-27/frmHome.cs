@@ -56,7 +56,7 @@ namespace TPWinForm_equipo_27
                 if (respuesta == DialogResult.Yes)
                 {
                     seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                    negocio.eliminar(seleccionado.Codigo);
+                    negocio.eliminar(seleccionado.Id);
 
                     cargarArticulos();
                 }
@@ -85,8 +85,11 @@ namespace TPWinForm_equipo_27
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-            Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            cargarImagen(articuloSeleccionado.ListaImagenes);
+            if(dgvArticulos.CurrentRow != null)
+            {
+                Articulo articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(articuloSeleccionado.ListaImagenes);
+            }
         }
         private void cargarImagen(List<Imagenes> listaImagenes)
         {
