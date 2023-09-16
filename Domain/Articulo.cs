@@ -9,23 +9,23 @@ namespace dominio
     public class Articulo
     {
         public int Id { get; set; }
-        public string codigo { get; set; }
+        public string Codigo { get; set; }
 
-        public string nombre { get; set; }
+        public string Nombre { get; set; }
 
-        public string descripcion { get; set;}
+        public string Descripcion { get; set;}
 
-        public Marcas marca { get; set; }
+        public Marcas Marca { get; set; }
 
-        public Categorias categoria { get; set; }
+        public Categorias Categoria { get; set; }
 
-        public decimal precio { get; set;}
+        public decimal Precio { get; set;}
 
-        public string UrlImagen { get; set; }
+        public List<Imagenes> ListaImagenes { get; set; }
 
         public override string ToString()
         {
-            return nombre;
+            return Nombre;
         }
 
     }

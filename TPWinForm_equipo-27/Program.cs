@@ -16,7 +16,7 @@ namespace TPWinForm_equipo_27
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TPWinForm());
+            Application.Run(new frmHome());
         }
     }
 }

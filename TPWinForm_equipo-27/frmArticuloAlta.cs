@@ -12,10 +12,10 @@ using negocio;
 
 namespace TPWinForm_equipo_27
 {
-    public partial class AltaArticulo : Form
+    public partial class frmArticuloAlta : Form
     {
         private Articulo articulo = null;
-        public AltaArticulo()
+        public frmArticuloAlta()
         {
             InitializeComponent();
         }
@@ -33,13 +33,13 @@ namespace TPWinForm_equipo_27
             {
             if(articulo == null)
                 articulo = new Articulo();
-                articulo.codigo = txtCodigo.Text;
-                articulo.nombre = txtNombre.Text;
-                articulo.descripcion = txtDescripcion.Text;
-                articulo.UrlImagen = txtUrlImagen.Text;
-                articulo.marca = (Marcas)cboMarca.SelectedItem;
-                articulo.categoria = (Categorias)cboCategoria.SelectedItem;
-                if (articulo.codigo != null)
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+          //      articulo.ListaImagenes = txtUrlImagen.Text;
+                articulo.Marca = (Marcas)cboMarca.SelectedItem;
+                articulo.Categoria = (Categorias)cboCategoria.SelectedItem;
+                if (articulo.Codigo != null)
                 {
                     articuloNegocio.modificar(articulo);
                     MessageBox.Show("Modificado exitosamente");
@@ -74,13 +74,13 @@ namespace TPWinForm_equipo_27
                 cboMarca.DisplayMember = "Descripcion";
                 if (articulo != null)
                 {
-                    txtCodigo.Text = articulo.codigo;
-                    txtNombre.Text = articulo.nombre;
-                    txtDescripcion.Text = articulo.descripcion;
-                    txtUrlImagen.Text = articulo.UrlImagen;
-                    cargarImagen(articulo.UrlImagen);
-                    cboMarca.SelectedValue = articulo.marca;
-                    cboCategoria.SelectedValue = articulo.categoria.Id;
+                    txtCodigo.Text = articulo.Codigo;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+          //          txtUrlImagen.Text = articulo.ListaImagenes;
+           //         cargarImagen(articulo.ListaImagenes);
+                    cboMarca.SelectedValue = articulo.Marca;
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
                 }
 
 

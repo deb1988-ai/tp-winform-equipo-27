@@ -1,6 +1,6 @@
 ﻿namespace TPWinForm_equipo_27
 {
-    partial class AltaArticulo
+    partial class frmArticuloAlta
     {
         /// <summary>
         /// Required designer variable.

@@ -10,27 +10,32 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo> listar()
+        public List<Articulo> listarArticulos()
         {
 			List<Articulo> lista = new List<Articulo>();
 			AccesoDatos datos = new AccesoDatos();
+            ImagenesNegocio imagenesNegocio = new ImagenesNegocio();
 
 			try
 			{
-                datos.setearConsulta("Select Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, Precio From ARTICULOS A,MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
+                datos.setearConsulta("Select a.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, Precio From ARTICULOS A,MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.codigo = (string)datos.Lector["Codigo"];
-                    aux.nombre = (string)datos.Lector["Nombre"];
-                    aux.descripcion = (string)datos.Lector["Descripcion"];
-                    aux.precio = (decimal)datos.Lector["Precio"];
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
 
-                    aux.marca = new Marcas();
-                    aux.marca.Descripcion = (string)datos.Lector["Marca"];
-                    aux.categoria = new Categorias();
-                    aux.categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    aux.ListaImagenes = new List<Imagenes>();
+                    aux.ListaImagenes = imagenesNegocio.listarImagenes(aux.Id);
+
+                    aux.Marca = new Marcas();
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categorias();
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
 
                     lista.Add(aux);
                 }
@@ -53,7 +58,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.codigo + ", '" + nuevo.nombre + "', '" + nuevo.descripcion + "', @idMarca, @idCategoria)");
+                datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)values(" + nuevo.Codigo + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', @idMarca, @idCategoria)");
                 datos.setearConsulta("Insert into Imagenes (IdArticulo,UrlImagen)values(" + nuevo.Id + ", @idMarca, @ImagenUrl)");
                 datos.ejecutarAccion();
             }
@@ -73,12 +78,12 @@ namespace negocio
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, IdMarca = @IdMarca, IdCategoria = @IdCategoria Where Codigo = @Codigo");
-                datos.setearParametro("@numero", articulo.codigo);
-                datos.setearParametro("@nombre", articulo.nombre);
-                datos.setearParametro("@desc", articulo.descripcion);
-                datos.setearParametro("@img", articulo.UrlImagen);
-                datos.setearParametro("@idTipo", articulo.marca.Id);
-                datos.setearParametro("@idDebilidad", articulo.categoria.Id);
+                datos.setearParametro("@numero", articulo.Codigo);
+                datos.setearParametro("@nombre", articulo.Nombre);
+                datos.setearParametro("@desc", articulo.Descripcion);
+                datos.setearParametro("@img", articulo.ListaImagenes);
+                datos.setearParametro("@idTipo", articulo.Marca.Id);
+                datos.setearParametro("@idDebilidad", articulo.Categoria.Id);
 
                 datos.ejecutarAccion();
             }
