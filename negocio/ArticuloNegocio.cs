@@ -110,7 +110,7 @@ namespace negocio
                     " Nombre = @nombre," +
                     " Descripcion = @descripcion," +
                     " IdMarca = @IdMarca," +
-                    " IdCategoria = @idCategoria" +
+                    " IdCategoria = @idCategoria," +
                     " Precio = @precio" +
                     " Where Id = @id");
 

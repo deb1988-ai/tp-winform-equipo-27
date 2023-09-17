@@ -31,16 +31,16 @@ namespace TPWinForm_equipo_27
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            Articulo seleccionado;
+            Articulo Articuloseleccionado;
             if(dgvArticulos.CurrentCell is null)
             {
                 MessageBox.Show("Debe Seleccionar un Artículo");
             }
             else
             {
-                seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                Articuloseleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
-                frmArticuloAlta modificar = new frmArticuloAlta(seleccionado);
+                frmArticuloAlta modificar = new frmArticuloAlta(Articuloseleccionado);
                 modificar.ShowDialog();
                 cargarArticulos();
             } 
@@ -49,14 +49,14 @@ namespace TPWinForm_equipo_27
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            Articulo seleccionado;
+            Articulo articuloSeleccionado;
             try
             {
                 DialogResult respuesta = MessageBox.Show("¿Seguro que deseas eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (respuesta == DialogResult.Yes)
                 {
-                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                    negocio.eliminar(seleccionado.Id);
+                    articuloSeleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    negocio.eliminar(articuloSeleccionado.Id);
 
                     cargarArticulos();
                 }
@@ -108,5 +108,13 @@ namespace TPWinForm_equipo_27
             cargarArticulos();
         }
 
+        private void btnImagenes_Click(object sender, EventArgs e)
+        {
+            Articulo articulo = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            frmImagenes imagenes = new frmImagenes(articulo.ListaImagenes);
+            imagenes.ShowDialog();
+            cargarArticulos();
+        }
     }
 }
