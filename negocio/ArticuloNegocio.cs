@@ -73,7 +73,7 @@ namespace negocio
                 datos.ejecutarAccion();
                 datos.cerrarConexion();
 
-                datos.setearConsulta("select top 1 Id from articulos order by id desc");
+                datos.setearConsulta("select top 1 Id from ARTICULOS order by id desc");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -84,7 +84,7 @@ namespace negocio
 
                 foreach (var imagen in articulo.ListaImagenes)
                 {
-                    datos.setearConsulta("insert into imagenes (idArticulo, ImagenUrl) values (@id,@url)");
+                    datos.setearConsulta("insert into IMAGENES (idArticulo, ImagenUrl) values (@id,@url)");
                     datos.setearParametro("@id", articulo.Id);
                     datos.setearParametro("@url", imagen.ImagenUrl);
 
@@ -133,10 +133,7 @@ namespace negocio
 
                 foreach (var imagen in articulo.ListaImagenes)
                 {
-                    datos.setearConsulta("insert into IMAGENES (idArticulo, ImagenUrl) values (" +
-                        "@id, '" +
-                        imagen.ImagenUrl+ "')");
-
+                    datos.setearConsulta("insert into IMAGENES (idArticulo, ImagenUrl) values (" +"@id, '" +imagen.ImagenUrl+ "')");
                     datos.ejecutarAccion();
                     datos.cerrarConexion();
                 }
