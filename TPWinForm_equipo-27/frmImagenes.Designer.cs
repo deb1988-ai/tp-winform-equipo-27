@@ -44,6 +44,7 @@
             // 
             // cboImagenes
             // 
+            this.cboImagenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboImagenes.FormattingEnabled = true;
             this.cboImagenes.Location = new System.Drawing.Point(89, 269);
             this.cboImagenes.Name = "cboImagenes";
