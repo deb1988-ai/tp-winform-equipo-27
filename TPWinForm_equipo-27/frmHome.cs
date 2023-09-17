@@ -22,6 +22,15 @@ namespace TPWinForm_equipo_27
             InitializeComponent();
         }
 
+        private void TPWinForm_Load(object sender, EventArgs e)
+        {
+            cargarArticulos();
+            cboCampo.Items.Add("Código");
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Descripción");
+            cboCampo.Items.Add("Marca");     
+        }
+
         private void btnAltaArticulo_Click(object sender, EventArgs e)
         {
             frmArticuloAlta alta = new frmArticuloAlta();
@@ -102,11 +111,7 @@ namespace TPWinForm_equipo_27
                 pbxArticulo.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
             }
         }
-
-        private void TPWinForm_Load(object sender, EventArgs e)
-        {
-            cargarArticulos();
-        }
+        
 
         private void btnImagenes_Click(object sender, EventArgs e)
         {
@@ -115,6 +120,84 @@ namespace TPWinForm_equipo_27
             frmImagenes imagenes = new frmImagenes(articulo.ListaImagenes);
             imagenes.ShowDialog();
             cargarArticulos();
+        }
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                if (validarFiltro())
+                    return;
+
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltro.Text;
+                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool validarFiltro()
+        {
+            if (cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el campo para filtrar.");
+                return true;
+            }
+            if (cboCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
+                return true;
+            }
+            if (cboCampo.SelectedItem.ToString() == "Nombre")
+            {
+                if (string.IsNullOrEmpty(txtFiltro.Text))
+                {
+                    MessageBox.Show("Ingresar un nombre");
+                    return true;
+                }
+            }
+            if (cboCampo.SelectedItem.ToString() == "Marca")
+            {
+                if (string.IsNullOrEmpty(txtFiltro.Text))
+                {
+                    MessageBox.Show("Ingresar marca");
+                    return true;
+               
+                }
+            }
+            if (cboCampo.SelectedItem.ToString() == "Descripción")
+            {
+                if (string.IsNullOrEmpty(txtFiltro.Text))
+                {
+                    MessageBox.Show("Ingresar descripcion");
+                    return true;
+                }
+            }
+            if (cboCampo.SelectedItem.ToString() == "Código")
+            {
+                if (string.IsNullOrEmpty(txtFiltro.Text))
+                {
+                    MessageBox.Show("Ingresar descripcion");
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
         }
     }
 }
