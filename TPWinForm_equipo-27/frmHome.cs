@@ -2,14 +2,7 @@
 using negocio;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TPWinForm_equipo_27
 {
@@ -121,7 +114,6 @@ namespace TPWinForm_equipo_27
             imagenes.ShowDialog();
             cargarArticulos();
         }
-
         private void btnFiltro_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
@@ -194,10 +186,28 @@ namespace TPWinForm_equipo_27
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             string opcion = cboCampo.SelectedItem.ToString();
-                cboCriterio.Items.Clear();
-                cboCriterio.Items.Add("Comienza con");
-                cboCriterio.Items.Add("Termina con");
-                cboCriterio.Items.Add("Contiene");
+            cboCriterio.Items.Clear();
+            cboCriterio.Items.Add("Comienza con");
+            cboCriterio.Items.Add("Termina con");
+            cboCriterio.Items.Add("Contiene");
+        }
+        private void btnMarcasAdministrador_Click(object sender, EventArgs e)
+        {
+            frmAdministradorMarcas abmMarcas = new frmAdministradorMarcas();
+            abmMarcas.ShowDialog();
+            cargarArticulos();
+        }
+
+        private void btnCategoriaAdministrador_Click(object sender, EventArgs e)
+        {
+            frmAdministradorCategorias abmCategorias = new frmAdministradorCategorias();
+            abmCategorias.ShowDialog();
+            cargarArticulos();
+        }
+
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

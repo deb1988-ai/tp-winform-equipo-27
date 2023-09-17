@@ -63,6 +63,16 @@ namespace TPWinForm_equipo_27.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap circle_info_solid3 {
+            get {
+                object obj = ResourceManager.GetObject("circle-info-solid3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pen_to_square_solid2 {
             get {
                 object obj = ResourceManager.GetObject("pen-to-square-solid2", resourceCulture);

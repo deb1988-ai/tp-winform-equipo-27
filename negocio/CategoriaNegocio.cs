@@ -40,5 +40,89 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void eliminar(int id)
+        {
+            try
+            {
+                validarEliminar(id);
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("delete from CATEGORIAS where id= @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private void validarEliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Select id from articulos where idCategoria = @idCategoria");
+                datos.setearParametro("@idCategoria", id);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    throw new Exception("Existen articulos con esta categoria, no se puede eliminar");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Existen articulos con esta categoria, no se puede eliminar");
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+        public void agregar(Categorias categoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Insert into CATEGORIAS (Descripcion)values(@descripcion)");
+                datos.setearParametro("@descripcion", categoria.Descripcion);
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void editar(Categorias categoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Update Categorias set Descripcion = @descripcion where id = @id");
+                datos.setearParametro("@descripcion", categoria.Descripcion);
+                datos.setearParametro("@id", categoria.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
