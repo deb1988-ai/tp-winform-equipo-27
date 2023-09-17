@@ -133,7 +133,9 @@ namespace negocio
 
                 foreach (var imagen in articulo.ListaImagenes)
                 {
-                    datos.setearConsulta("insert into IMAGENES (idArticulo, ImagenUrl) values (" +"@id, '" +imagen.ImagenUrl+ "')");
+                    datos.setearConsulta("insert into IMAGENES (idArticulo, ImagenUrl) values (" +"@id, '"+imagen.ImagenUrl+ "')");
+                    datos.setearParametro("@idArticulo", articulo.Id);
+                    datos.setearParametro("@nomImagenUrlbre", imagen.ImagenUrl);
                     datos.ejecutarAccion();
                     datos.cerrarConexion();
                 }
