@@ -126,14 +126,14 @@ namespace negocio
                 datos.ejecutarAccion();
                 datos.cerrarConexion();
 
-                datos.setearConsulta("delete from imagenes where idArticulo = @id");
+                datos.setearConsulta("delete from IMAGENES where idArticulo = @id");
 
                 datos.ejecutarAccion();
                 datos.cerrarConexion();
 
                 foreach (var imagen in articulo.ListaImagenes)
                 {
-                    datos.setearConsulta("insert into imagenes (idArticulo, ImagenUrl) values (" +
+                    datos.setearConsulta("insert into IMAGENES (idArticulo, ImagenUrl) values (" +
                         "@id, '" +
                         imagen.ImagenUrl+ "')");
 
