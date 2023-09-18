@@ -43,11 +43,11 @@
             this.txtFiltro = new System.Windows.Forms.TextBox();
             this.btnFiltro = new System.Windows.Forms.Button();
             this.gbxFiltros = new System.Windows.Forms.GroupBox();
+            this.btnLimpiarFiltros = new System.Windows.Forms.Button();
             this.btnDetalles = new System.Windows.Forms.Button();
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnLimpiarFiltros = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.gbxFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
@@ -147,6 +147,7 @@
             // 
             // cboCampo
             // 
+            this.cboCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCampo.FormattingEnabled = true;
             this.cboCampo.Location = new System.Drawing.Point(79, 22);
             this.cboCampo.Margin = new System.Windows.Forms.Padding(4);
@@ -157,6 +158,7 @@
             // 
             // cboCriterio
             // 
+            this.cboCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCriterio.FormattingEnabled = true;
             this.cboCriterio.Location = new System.Drawing.Point(79, 55);
             this.cboCriterio.Margin = new System.Windows.Forms.Padding(4);
@@ -200,6 +202,17 @@
             this.gbxFiltros.TabStop = false;
             this.gbxFiltros.Text = "Filtros";
             // 
+            // btnLimpiarFiltros
+            // 
+            this.btnLimpiarFiltros.Location = new System.Drawing.Point(424, 55);
+            this.btnLimpiarFiltros.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
+            this.btnLimpiarFiltros.Size = new System.Drawing.Size(109, 28);
+            this.btnLimpiarFiltros.TabIndex = 15;
+            this.btnLimpiarFiltros.Text = "Limpiar";
+            this.btnLimpiarFiltros.UseVisualStyleBackColor = true;
+            this.btnLimpiarFiltros.Click += new System.EventHandler(this.btnLimpiarFiltros_Click);
+            // 
             // btnDetalles
             // 
             this.btnDetalles.Image = global::TPWinForm_equipo_27.Properties.Resources.circle_info_solid3;
@@ -242,17 +255,6 @@
             this.btnEliminar.TabIndex = 1;
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnLimpiarFiltros
-            // 
-            this.btnLimpiarFiltros.Location = new System.Drawing.Point(424, 55);
-            this.btnLimpiarFiltros.Margin = new System.Windows.Forms.Padding(4);
-            this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
-            this.btnLimpiarFiltros.Size = new System.Drawing.Size(109, 28);
-            this.btnLimpiarFiltros.TabIndex = 15;
-            this.btnLimpiarFiltros.Text = "Limpiar";
-            this.btnLimpiarFiltros.UseVisualStyleBackColor = true;
-            this.btnLimpiarFiltros.Click += new System.EventHandler(this.btnLimpiarFiltros_Click);
             // 
             // frmHome
             // 
