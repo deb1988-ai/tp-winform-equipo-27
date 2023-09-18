@@ -47,6 +47,7 @@
             this.pbxArticulo = new System.Windows.Forms.PictureBox();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnLimpiarFiltros = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.gbxFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
@@ -173,10 +174,10 @@
             // 
             // btnFiltro
             // 
-            this.btnFiltro.Location = new System.Drawing.Point(302, 52);
+            this.btnFiltro.Location = new System.Drawing.Point(302, 55);
             this.btnFiltro.Margin = new System.Windows.Forms.Padding(4);
             this.btnFiltro.Name = "btnFiltro";
-            this.btnFiltro.Size = new System.Drawing.Size(231, 29);
+            this.btnFiltro.Size = new System.Drawing.Size(114, 28);
             this.btnFiltro.TabIndex = 14;
             this.btnFiltro.Text = "Buscar";
             this.btnFiltro.UseVisualStyleBackColor = true;
@@ -184,6 +185,7 @@
             // 
             // gbxFiltros
             // 
+            this.gbxFiltros.Controls.Add(this.btnLimpiarFiltros);
             this.gbxFiltros.Controls.Add(this.cboCampo);
             this.gbxFiltros.Controls.Add(this.btnFiltro);
             this.gbxFiltros.Controls.Add(this.lblCampo);
@@ -241,6 +243,17 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // btnLimpiarFiltros
+            // 
+            this.btnLimpiarFiltros.Location = new System.Drawing.Point(424, 55);
+            this.btnLimpiarFiltros.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLimpiarFiltros.Name = "btnLimpiarFiltros";
+            this.btnLimpiarFiltros.Size = new System.Drawing.Size(109, 28);
+            this.btnLimpiarFiltros.TabIndex = 15;
+            this.btnLimpiarFiltros.Text = "Limpiar";
+            this.btnLimpiarFiltros.UseVisualStyleBackColor = true;
+            this.btnLimpiarFiltros.Click += new System.EventHandler(this.btnLimpiarFiltros_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -289,6 +302,7 @@
         private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.GroupBox gbxFiltros;
         private System.Windows.Forms.Button btnDetalles;
+        private System.Windows.Forms.Button btnLimpiarFiltros;
     }
 }
 

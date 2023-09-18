@@ -168,69 +168,35 @@ namespace negocio
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();
+            ImagenesNegocio imagenesNegocio = new ImagenesNegocio();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "Select a.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, Precio, A.idMarca, A.idCategoria From ARTICULOS A,MARCAS M, CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id";
-                if (campo == "Codigo")
+                string consulta = "select * from(Select a.Id," +
+                    " Codigo," +
+                    " Nombre," +
+                    " A.Descripcion," +
+                    " M.Descripcion Marca," +
+                    " C.Descripcion Categoria," +
+                    " Precio, " +
+                    " A.IdMarca," +
+                    " A.IdCategoria" +
+                    " From articulos a" +
+                    " join marcas m on m.id = a.idmarca" +
+                    " join categorias c on c.id = a.IdCategoria) tabla";
+
+
+                switch (criterio.ToUpper())
                 {
-                    switch (criterio)
-                    {
-                        case "Comienza con":
-                            consulta += "Codigo like '" + filtro + "%' ";
-                    break;
-                        case "Termina con":
-                        consulta += "Codigo like '%" + filtro + "'";
+                    case "COMIENZA CON":
+                        consulta += " where " + campo.ToUpper() + " like '" + filtro + "%' ";
                         break;
-                    default:
-                        consulta += "Codigo like '%" + filtro + "%'";
+                    case "TERMINA CON":
+                        consulta += " where " + campo.ToUpper() + " like '%" + filtro + "'";
                         break;
-                    }
-                }
-                else if (campo == "Nombre")
-                {
-                    switch (criterio)
-                    {
-                        case "Comienza con":
-                            consulta += "Nombre like '" + filtro + "%' ";
-                            break;
-                        case "Termina con":
-                            consulta += "Nombre like '%" + filtro + "'";
-                            break;
-                        default:
-                            consulta += "Nombre like '%" + filtro + "%'";
-                            break;
-                    }
-                }
-                else if (campo == "Descripción+")
-                {
-                    switch (criterio)
-                    {
-                        case "Comienza con":
-                            consulta += "A.Descripcion like '" + filtro + "%' ";
-                            break;
-                        case "Termina con":
-                            consulta += "A.Descripcion like '%" + filtro + "'";
-                            break;
-                        default:
-                            consulta += "A.Descripcion like '%" + filtro + "%'";
-                            break;
-                    }
-                }
-                else
-                {
-                    switch (criterio)
-                    {
-                        case "Comienza con":
-                            consulta += "M.Descripcion Marca like '" + filtro + "%' ";
-                            break;
-                        case "Termina con":
-                            consulta += "M.Descripcion Marca like '%" + filtro + "'";
-                            break;
-                        default:
-                            consulta += "M.Descripcion Marca like '%" + filtro + "%'";
-                            break;
-                    }
+                    case "CONTIENE":
+                        consulta += " where " + campo.ToUpper() + " like '%" + filtro + "%'";
+                        break;
                 }
 
                 datos.setearConsulta(consulta);
@@ -243,11 +209,15 @@ namespace negocio
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Marca = new Marcas();
-                    aux.Marca.Id = (int)datos.Lector["Id"];
-                    aux.Marca.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
                     aux.Categoria = new Categorias();
-                    aux.Categoria.Id = (int)datos.Lector["Id"];
-                    aux.Categoria.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    aux.ListaImagenes = new List<Imagenes>();
+                    aux.ListaImagenes = imagenesNegocio.listarImagenes(aux.Id);
+
 
                     lista.Add(aux);
                 }

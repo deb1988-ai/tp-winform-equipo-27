@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using dominio;
 using negocio;
@@ -11,16 +12,31 @@ namespace TPWinForm_equipo_27
     public partial class frmArticuloAlta : Form
     {
         private Articulo articulo = null;
+        private bool esDetalle = false;
         public frmArticuloAlta()
         {
             InitializeComponent();
         }
 
-        public frmArticuloAlta(Articulo art)
+        public frmArticuloAlta(Articulo art,bool detalle = false)
         {
             InitializeComponent();
             this.articulo = art;
-            this.Text = "Modificar Articulo";
+            if (detalle)
+            {
+                this.esDetalle = detalle;
+                this.Text = "Detalle Articulo";
+            }
+            else
+            {
+                this.Text = "Modificar Articulo";
+            }
+        }
+        public frmArticuloAlta(bool detalle)
+        {
+            InitializeComponent();
+            this.esDetalle = detalle;
+            this.Text = "Detalle Articulo";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -34,26 +50,28 @@ namespace TPWinForm_equipo_27
 
             try
             {
-                if(articulo == null)
-                    articulo = new Articulo();
+                if (!esDetalle) {
+                    if(articulo == null)
+                        articulo = new Articulo();
 
-                articulo.Codigo = txtCodigo.Text;
-                articulo.Nombre = txtNombre.Text;
-                articulo.Descripcion = txtDescripcion.Text;
-                articulo.ListaImagenes = cboImagenes.Items.Cast<Imagenes>().ToList();
-                articulo.Marca = (Marcas)cboMarca.SelectedItem;
-                articulo.Categoria = (Categorias)cboCategoria.SelectedItem;
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                    articulo.Codigo = txtCodigo.Text;
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.ListaImagenes = cboImagenes.Items.Cast<Imagenes>().ToList();
+                    articulo.Marca = (Marcas)cboMarca.SelectedItem;
+                    articulo.Categoria = (Categorias)cboCategoria.SelectedItem;
+                    articulo.Precio = decimal.Parse(txtPrecio.Text);
 
-                if (articulo.Id != 0)
-                {
-                    articuloNegocio.modificar(articulo);
-                    MessageBox.Show("Modificado exitosamente");
-                }
-                else
-                {
-                    articuloNegocio.agregar(articulo);
-                    MessageBox.Show("Agregado exitosamente");
+                    if (articulo.Id != 0)
+                    {
+                        articuloNegocio.modificar(articulo);
+                        MessageBox.Show("Modificado exitosamente");
+                    }
+                    else
+                    {
+                        articuloNegocio.agregar(articulo);
+                        MessageBox.Show("Agregado exitosamente");
+                    }
                 }
                 Close();
 
@@ -97,7 +115,20 @@ namespace TPWinForm_equipo_27
                     cboImagenes.SelectedValue = articulo.ListaImagenes[0].Id;
                     cargarImagen(articulo.ListaImagenes[0].ImagenUrl);
                 }
-
+                if (esDetalle)
+                {
+                    txtCodigo.Enabled = false;
+                    txtNombre.Enabled = false;
+                    txtDescripcion.Enabled = false;
+                    cboMarca.Enabled = false;
+                    cboCategoria.Enabled = false;
+                    txtPrecio.Enabled = false;
+                    txtUrlImagen.Visible = false;
+                    btnCancelar.Visible = false;
+                    btnAgregarImagen.Visible = false;
+                    btnQuitarImagen.Visible = false;
+                    lblImagen.Visible = false;
+                }
             }
             catch (Exception ex)
             {

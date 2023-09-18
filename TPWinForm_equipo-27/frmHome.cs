@@ -18,10 +18,11 @@ namespace TPWinForm_equipo_27
         private void TPWinForm_Load(object sender, EventArgs e)
         {
             cargarArticulos();
-            cboCampo.Items.Add("Código");
+            cboCampo.Items.Add("Codigo");
             cboCampo.Items.Add("Nombre");
-            cboCampo.Items.Add("Descripción");
+            cboCampo.Items.Add("Descripcion");
             cboCampo.Items.Add("Marca");     
+            cboCampo.Items.Add("Categoria");     
         }
 
         private void btnAltaArticulo_Click(object sender, EventArgs e)
@@ -146,50 +147,23 @@ namespace TPWinForm_equipo_27
                 MessageBox.Show("Por favor, seleccione el criterio para filtrar.");
                 return true;
             }
-            if (cboCampo.SelectedItem.ToString() == "Nombre")
+            if (string.IsNullOrEmpty(txtFiltro.Text))
             {
-                if (string.IsNullOrEmpty(txtFiltro.Text))
-                {
-                    MessageBox.Show("Ingresar un nombre");
-                    return true;
-                }
+                MessageBox.Show("Ingresar " + cboCampo.SelectedItem.ToString());
+                return true;
             }
-            if (cboCampo.SelectedItem.ToString() == "Marca")
-            {
-                if (string.IsNullOrEmpty(txtFiltro.Text))
-                {
-                    MessageBox.Show("Ingresar marca");
-                    return true;
-               
-                }
-            }
-            if (cboCampo.SelectedItem.ToString() == "Descripción")
-            {
-                if (string.IsNullOrEmpty(txtFiltro.Text))
-                {
-                    MessageBox.Show("Ingresar descripcion");
-                    return true;
-                }
-            }
-            if (cboCampo.SelectedItem.ToString() == "Código")
-            {
-                if (string.IsNullOrEmpty(txtFiltro.Text))
-                {
-                    MessageBox.Show("Ingresar descripcion");
-                    return true;
-                }
-            }
-
             return false;
         }
 
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string opcion = cboCampo.SelectedItem.ToString();
-            cboCriterio.Items.Clear();
-            cboCriterio.Items.Add("Comienza con");
-            cboCriterio.Items.Add("Termina con");
-            cboCriterio.Items.Add("Contiene");
+            if(cboCampo.SelectedItem != null)
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+            }
         }
         private void btnMarcasAdministrador_Click(object sender, EventArgs e)
         {
@@ -207,7 +181,28 @@ namespace TPWinForm_equipo_27
 
         private void btnDetalles_Click(object sender, EventArgs e)
         {
-            
+            Articulo Articuloseleccionado;
+            if (dgvArticulos.CurrentCell is null)
+            {
+                MessageBox.Show("Debe Seleccionar un Artículo");
+            }
+            else
+            {
+                Articuloseleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+                frmArticuloAlta detalle = new frmArticuloAlta(Articuloseleccionado, true);
+                detalle.ShowDialog();
+                cargarArticulos();
+            }
+        }
+
+        private void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            cboCampo.SelectedItem = null;
+            cboCriterio.SelectedItem = null;
+            txtFiltro.Text = "";
+
+            cargarArticulos();
         }
     }
 }
