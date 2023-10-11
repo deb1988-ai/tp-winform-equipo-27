@@ -13,6 +13,6 @@ namespace Domain
 
         public int Cantidad { get; set; }
 
-        public Articulo articulo { get; set; }
+        public Articulo Articulo { get; set; }
     }
 }
